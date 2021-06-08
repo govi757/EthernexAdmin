@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ApiConstants } from 'src/constants/apiConstants';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private REST_API_SERVER = "http://ethernex.herokuapp.com";
+  private REST_API_SERVER = ApiConstants.apiUrl;
   constructor(private httpClient: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders()
