@@ -1,0 +1,41 @@
+<div class="col">
+  <div class="row container">
+    <h2 style="font-weight: bold;" class="my-5"> <i class="fa fa-bell-o" aria-hidden="true"></i> Subscribers</h2>
+    <button (click)="sendEmailPressed()" class="btn btn-primary my-5 mx-4"><i class="fa fa-envelope" aria-hidden="true"></i>  Send Email to Subscribers</button>
+  </div>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sub of subscriberList">
+        <td>{{sub.name}}</td>
+        <td>{{sub.email}}</td>
+        <td>{{sub.phoneNumber}}</td>
+      </tr>
+    </tbody>
+    
+  </table>
+  <div *ngIf="subscriberList.length==0" style="color: #ccc;">  
+    <h1 class="mx-1"><i class="fa fa-bell-o mx-2" aria-hidden="true" style="color: #ccc;"></i>No Subscribers Added</h1>
+</div>
+
+<div class="wezenModal" *ngIf="showEmailEditor">
+  <div style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;"></div>
+  <div class="card container my-5" style="width: 800px;z-index: 10;">
+      <div class="container my-3" >
+        <!-- <quill-editor [styles]="{height: '235px'}"></quill-editor> -->
+
+          <div class="row mx-2 my-4">
+              <button  class="btn btn-primary">Delete</button>
+              <button   class="btn">Cancel</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+</div>

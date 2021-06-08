@@ -1,0 +1,198 @@
+<div class="richtext-box stickyBackground" id="matRichText">
+    <!-- <ckeditor
+    [(ngModel)]="text"
+    [readonly]="false"
+    [config]="config"
+    >
+  </ckeditor> -->
+    
+      <!-- <div class="row col mb-5" style="background-color: transparent;display: flex;flex-direction: row;align-items: center;" *ngIf="isSticky">
+      <div
+      (click)="changeBackgroundColor($event,color)"
+      *ngFor="let color of backgroundColorList"
+      class="indColorStyle"
+      [ngStyle]="{ background: color }"
+    ></div>
+            <input
+              type="color"
+              (change)="changeBackgroundColor($event, $event.target.value)"
+            />
+    </div> -->
+      
+          <div class="hor-toolbar" id="toolbar">
+            <ul class="tool-list">
+              <li class="tool">
+                <button
+                  (click)="
+                    richTextConfig.justifyLeft = !richTextConfig.justifyLeft
+                  "
+                  type="button"
+                  data-command="justifyLeft"
+                  class="tool--btn"
+                  [ngClass]="{ active: richTextConfig.justifyLeft }"
+                >
+                <i class="fa fa-align-left" aria-hidden="true"></i>
+                </button>
+              </li>
+              <li class="tool">
+                <button
+                  (click)="
+                    richTextConfig.justifyCenter = !richTextConfig.justifyCenter
+                  "
+                  type="button"
+                  data-command="justifyCenter"
+                  class="tool--btn"
+                  [ngClass]="{ active: richTextConfig.justifyCenter }"
+                >
+                <i class="fa fa-align-center" aria-hidden="true"></i>
+                </button>
+              </li>
+              <li class="tool">
+                <button
+                  type="button"
+                  style="font-size: 19px"
+                  class="tool--btn"
+                  (click)="showFontFamily = !showFontFamily"
+                >
+                  {{ richTextConfig.fontFamily }}
+                </button>
+                <div *ngIf="showFontFamily === true" class="fontFamilyContainer">
+                  <div
+                    (click)="
+                      changeFontFamily(font); showFontFamily = !showFontFamily
+                    "
+                    style="width: 100%"
+                    *ngFor="let font of fontFamilies"
+                  >
+                    <p [ngStyle]="{ 'font-family': font }">{{ font }}</p>
+                  </div>
+                </div>
+              </li>
+              <li class="tool">
+                <div
+                  style="height: 60%; width: 1px; background-color: grey"
+                ></div>
+              </li>
+              <li class="tool">
+                <button
+                  type="button"
+                  style="font-size: 19px"
+                  class="tool--btn"
+                  (click)="showFontSize = !showFontSize"
+                >
+                  {{ fontsizeList[richTextConfig.fontSize - 1].label }}
+                </button>
+                <div *ngIf="showFontSize === true" class="fontFamilyContainer">
+                  <div
+                    (click)="
+                      changeFontSize(font.val);
+                      showFontSize = !showFontSize;
+                      selectedFont = font
+                    "
+                    style="width: 100%"
+                    *ngFor="let font of fontsizeList"
+                  >
+                    <p [ngStyle]="{ 'font-family': font }">{{ font.label }}</p>
+                  </div>
+                </div>
+              </li>
+              <li class="tool">
+                <button
+                  (click)="richTextConfig.isBold = !richTextConfig.isBold"
+                  type="button"
+                  data-command="bold"
+                  class="tool--btn"
+                  [ngClass]="{ active: richTextConfig.isBold }"
+                >
+                <i class="fa fa-bold" aria-hidden="true"></i>
+                </button>
+              </li>
+              <li class="tool">
+                <button
+                  (click)="richTextConfig.isItalic = !richTextConfig.isItalic"
+                  type="button"
+                  data-command="italic"
+                  class="tool--btn"
+                  [ngClass]="{ active: richTextConfig.isItalic }"
+                >
+                <i class="fa fa-italic" aria-hidden="true"></i>
+
+                </button>
+              </li>
+              <li class="tool">
+                <button
+                  (click)="
+                    richTextConfig.isUnderLined = !richTextConfig.isUnderLined
+                  "
+                  type="button"
+                  data-command="underline"
+                  class="tool--btn"
+                  [ngClass]="{ active: richTextConfig.isUnderLined }"
+                >
+                  <span class="material-icons toolbar-item">
+                    <i class="fa fa-underline" aria-hidden="true"></i>
+
+                  </span>
+                </button>
+              </li>
+              <li class="tool">
+                <button
+                  (click)="
+                    richTextConfig.insertOrderedList = !richTextConfig.insertOrderedList
+                  "
+                  [ngClass]="{ active: richTextConfig.insertOrderedList }"
+                  type="button"
+                  data-command="insertOrderedList"
+                  class="tool--btn"
+                >
+                <i class="fa fa-list-ol" aria-hidden="true"></i>
+                </button>
+              </li>
+              <li class="tool">
+                <button
+                  (click)="
+                    richTextConfig.insertUnorderedList = !richTextConfig.insertUnorderedList
+                  "
+                  [ngClass]="{ active: richTextConfig.insertUnorderedList }"
+                  type="button"
+                  data-command="insertUnorderedList"
+                  class="tool--btn"
+                >
+                <i class="fa fa-list-ul" aria-hidden="true"></i>
+                </button>
+              </li>
+              <li class="tool">
+                <button
+                  (click)="showcolorPicker = !showcolorPicker"
+                  type="button"
+                  class="tool--btn"
+                >
+                  A
+                  <div
+                    [ngStyle]="{ background: richTextConfig.fontColor }"
+                    style="width: 100%; height: 6px"
+                  ></div>
+                </button>
+                <div *ngIf="showcolorPicker === true" class="colorcontainer">
+                  <div
+                    (click)="changeFontColor(color)"
+                    *ngFor="let color of colorsList"
+                    class="indColorStyle"
+                    [ngStyle]="{ background: color }"
+                  ></div>
+                  <!-- <input
+                    type="color"
+                    (change)="changeFontColor($event.target.value)"
+                  /> -->
+                </div>
+              </li>
+            </ul>
+          </div>
+  </div>
+  <div
+    id="output"
+    (input)="editText($event)"
+    contenteditable="true"
+    (blur)="blurCalled($event)"
+  ></div>
+  

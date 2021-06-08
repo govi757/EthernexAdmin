@@ -1,0 +1,31 @@
+.accordion {
+    width: 800px;
+}
+.card {
+    width: 100% !important;
+}
+.card-header {
+    width: 100% !important;
+}
+.btn-link {
+    width: 100% !important;
+}
+
+.collapse {
+    border: none !important;
+}
+
+.accordion .card {
+    border: 1px solid #ccc !important;
+}
+
+.wezenModal {
+    position: fixed;width: 100%;height: 100vh;top:0;left:0;z-index: 9;
+    animation: pulse 0.6s normal;
+}
+.btn-link {
+    color: #000;
+}
+.btn-link :hover {
+    text-decoration: none;
+}

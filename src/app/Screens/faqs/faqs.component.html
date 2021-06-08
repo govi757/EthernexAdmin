@@ -1,0 +1,79 @@
+
+<div class="col">
+    <div style="margin: 20px;" class="row">
+        <h2 ><i class="fa fa-question-circle" aria-hidden="true"></i>FAQ</h2>
+        <button (click)="addFAQClick()" class="btn btn-primary mx-5 btn-rounded">
+          <i class="fa fa-plus" aria-hidden="true" style="color:white"></i>  
+        </button>
+    </div>
+<ul class="nav nav-tabs my-3">
+    <li class="nav-item" *ngFor="let faq of faqList" (click)="changeTab(faq)" >
+      <a class="nav-link active" [ngClass]="{'active': currentFAQ === faq}" data-toggle="tab">{{faq}}</a>
+    </li>
+  </ul>
+  <div *ngIf="faqs.length==0">  
+    <h1 class="mx-1"><i class="fa fa-question-circle mx-2" aria-hidden="true" style="color: #ccc;"></i>No FAQs Added</h1>
+</div>
+
+<div class="accordion" id="accordionExample">
+    <div class="card my-5" *ngFor="let faq of faqs" >
+      <div class="card-header row d-flex align-items-center">
+        <h2 class="mb-0" style="flex:1" >
+          <button  (click)="selectedFaq=faq._id" class="btn btn-link" type="button" style="text-align: left;">
+            {{faq.title}}
+
+          </button>
+        </h2>
+
+        <a (click)="editClicked(faq)" class="card-link">Edit</a>
+        <a (click)="deleteClicked(faq)" class="card-link">Delete</a>
+      </div>
+  
+      <div class="collapse" [ngClass]="{'show': selectedFaq==faq._id}">
+        <div class="card-body">
+            {{faq.description}}
+        </div>
+      </div>
+      <div class="row col mx-2">
+      </div>
+    </div>
+    
+  </div>
+  
+
+
+<div class="wezenModal" *ngIf="showAddFAQ||showEditFAQ">
+    <div (click)="closeModal()" style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;"></div>
+    <div class="card container my-5" style="width: 500px;z-index: 10;">
+        <div class="formBody container my-3" >
+            <h6 style="color:#000">Title</h6>
+            <input [(ngModel)]="currentBody.title" class="form-control" />
+            <h6 style="color:#000">Description</h6>
+            <textarea  [(ngModel)]="currentBody.description" class="form-control"></textarea>
+            <!-- <h6 style="color:#000">Select Section</h6>
+            <select *ngIf="currentFAQ=='overview'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.type">
+                <option selected>Select Screen</option>
+                <option *ngFor="let val of overViewPageSections" [value]="val">{{val}}</option>
+              </select> -->
+            
+            <div class="row mx-2 my-4">
+                <button (click)="addFAQ()" class="btn btn-primary">{{showEditFAQ?'Edit':'Add'}} FAQ</button>
+                <button (click)="closeModal()"  class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wezenModal" *ngIf="showDeleteModal">
+    <div (click)="closeModal()" style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;"></div>
+    <div class="card container my-5" style="width: 300px;z-index: 10;">
+        <div class="container my-3" >
+            <p style="color:#000">Are you sure want to delete?</p>
+            <div class="row mx-2 my-4">
+                <button (click)="deleteFAQ()" class="btn btn-primary">Delete</button>
+                <button (click)="closeModal()"  class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+

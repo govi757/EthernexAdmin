@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: monteSerrat;
+    src: url(./assets/Montserrat/Montserrat-Regular.ttf);
+  }
+
+a{
+    cursor: pointer !important;
+}
+body {
+    font-family: monteSerrat !important;
+}
+
+.wezenModal {
+    position: fixed;width: 100%;height: 100vh;top:0;left:0;z-index: 9;
+    animation: pulse 0.6s normal;
+    overflow: scroll;
+}
+
+@keyframes pulse {
+    0% {
+      opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+  }
+
+  .formBody h6 {
+      margin-top: 10px;
+  }
+
+  .card {
+    -webkit-box-shadow: 1px 1px 5px 1px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    1px 1px 5px 1px #ccc;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         1px 1px 5px 1px #ccc;
+    border-radius: 8px;
+  }
+  .card img {
+    border-radius: 8px;border: 1px solid #ccc;
+  }
+
+  .btn-rounded {
+    border-radius: 100px;
+    width:50px;
+    height:50px;
+    background-color: #1c7fe0 !important;
+}
+.nav {
+    margin-bottom: 20px;
+}
+.nav-link {
+    color: grey !important;
+}
+.nav-item .active {
+    color: #000 !important;
+}

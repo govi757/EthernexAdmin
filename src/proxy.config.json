@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://ethernex.herokuapp.com/",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

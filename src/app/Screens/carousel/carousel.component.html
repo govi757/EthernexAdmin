@@ -1,0 +1,105 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="col">
+  <div style="margin: 20px;border-bottom: 1px solid #ccc;" class="row d-flex align-items-center ">
+    <h2 ><i class="fa fa-picture-o" aria-hidden="true"></i> Images</h2>
+    <button (click)="addCarouselClick()" class="btn btn-primary mx-5 my-2 btn-rounded text-center">
+      <i class="fa fa-plus" aria-hidden="true" style="color:white"></i>  
+    </button>
+</div>
+<ul class="nav nav-tabs">
+    <li class="nav-item" *ngFor="let screen of screenList" (click)="changeTab(screen)" >
+      <a class="nav-link active" [ngClass]="{'active': currentScreen === screen}" data-toggle="tab">{{screen}}</a>
+    </li>
+  </ul>
+    <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
+        <div class="card" style="width: 18rem;margin: 10px;border-radius: 8px;" *ngFor="let carousel of carouselList"  >
+            <div class="card-body">
+                <img [src]="carousel.imageUrl" style="border-radius: 8px;" width="100%" height="150"/>
+                <h6 class="mt-2 card-title" style="font-weight: bold;">{{carousel.title||'NA'}}</h6>
+              <p class="card-text">{{carousel.type||'NA'}}</p>
+              <a (click)="editClicked(carousel)" class="card-link">Edit</a>
+              <a (click)="deleteClicked(carousel)" class="card-link">Delete</a>
+              <a (click)="checkTheChange(carousel.screen)" style="position: absolute;bottom:10px;right:10px" class="card-link btn btn-primary pull-right">Check</a>
+            </div>
+          </div>
+    </div>
+    <div *ngIf="carouselList.length==0"  style="color: #ccc;">
+      <h1 class="mx-1">
+        <i class="fa fa-picture-o" aria-hidden="true"></i>
+        No Images Added
+      </h1>
+      
+    </div>
+</div>
+
+
+<div class="wezenModal" *ngIf="showAddCarousel||showEditCarousel">
+    <div (click)="closeModal()" style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;"></div>
+    <div class="card container my-5" style="width: 500px;z-index: 10;">
+        <div class="formBody container my-3" >
+          <h6 *ngIf="currentScreen!=='portfolio'" style="color:#000">Select Section</h6>
+          <select *ngIf="currentScreen=='home'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.type">
+            <option selected>Select Screen</option>
+            <option *ngFor="let val of homePageSections" [value]="val">{{val}}</option>
+          </select>
+            <select *ngIf="currentScreen=='faq'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.type">
+                <option selected>Select Screen</option>
+                <option *ngFor="let val of overViewPageSections" [value]="val">{{val}}</option>
+              </select>
+            <select *ngIf="currentScreen=='overview'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.type">
+                <option selected>Select Screen</option>
+                <option *ngFor="let val of overViewPageSections" [value]="val">{{val}}</option>
+              </select>
+              <select *ngIf="currentScreen=='designService'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.type">
+                <option selected>Select Screen</option>
+                <option *ngFor="let val of designServiceSection" [value]="val">{{val}}</option>
+              </select>
+              <select *ngIf="currentScreen=='developmentService'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.type">
+                <option selected>Select Screen</option>
+                <option *ngFor="let val of developmentServiceSection" [value]="val">{{val}}</option>
+              </select>
+              <select *ngIf="currentScreen=='itInfraManagementService'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.type">
+                <option selected>Select Screen</option>
+                <option *ngFor="let val of itInfraServiceSection" [value]="val">{{val}}</option>
+              </select>
+              <select *ngIf="currentScreen=='digitalMarketing'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.type">
+                <option selected>Select Screen</option>
+                <option *ngFor="let val of digitalServiceSection" [value]="val">{{val}}</option>
+              </select>
+              
+            <h6 style="color:#000">Title</h6>
+            <input placeholder="Title(optional)" [(ngModel)]="currentBody.title" class="form-control" />
+            <h6 style="color:#000">Description</h6>
+            <textarea placeholder="Description(optional)"  [(ngModel)]="currentBody.description" class="form-control"></textarea>
+            
+              
+            <!-- <span>Select Image</span> -->
+            <!-- <label class="image-upload-container btn btn-bwm"> -->
+                <h6 style="color:#000">Image</h6>
+                <input #imageInput
+                class="form-control"
+                       type="file"
+                       accept="image/*"
+                       (change)="processFile(imageInput)">
+              <!-- </label> -->
+            <div class="row mx-2 my-4">
+                <button (click)="addCarousel()" [disabled]="currentBody.imageUrl==''" class="btn btn-primary">{{showEditCarousel?'Edit':'Add'}} Carousel</button>
+                <button (click)="closeModal()"  class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wezenModal" *ngIf="showDeleteModal">
+    <div (click)="closeModal()" style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;"></div>
+    <div class="card container my-5" style="width: 500px;z-index: 10;">
+        <div class="container my-3" >
+            <p style="color:#000">Are you sure want to delete?</p>
+            <div class="row mx-2 my-4">
+                <button (click)="deleteCarousel()" class="btn btn-primary">Delete</button>
+                <button (click)="closeModal()"  class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+

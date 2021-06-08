@@ -1,0 +1,115 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="col">
+    <div style="margin: 20px;border-bottom: 1px solid #ccc;" class="row d-flex align-items-center ">
+        <h2> <i class="fa fa-info-circle" aria-hidden="true"></i> BasicInfo</h2>
+        <button (click)="addBasicInfoClick()" class="btn btn-primary mx-5 my-2 btn-rounded text-center">
+            <i class="fa fa-plus" aria-hidden="true" style="color:white"></i>
+        </button>
+    </div>
+    <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
+        <div class="card" style="width: 18rem;margin: 10px;" *ngFor="let basicInfo of basicInfoList">
+            <div class="card-body">
+                <img [src]="basicInfo.imageUrl!==''?basicInfo.imageUrl:'../../../assets/images/noImage.png'"
+                    width="100%" height="150" />
+                <h6 class="mt-2 card-title" style="font-weight: bold;">{{basicInfo.title||'NA'}}</h6>
+                <p class="card-text">Screen: {{basicInfo.screen}}</p>
+                <a (click)="editClicked(basicInfo)" class="card-link">Edit</a>
+                <a (click)="deleteClicked(basicInfo)" class="card-link">Delete</a>
+                <a (click)="checkTheChange(basicInfo.screen)" style="position: absolute;bottom:10px;right:10px" class="card-link btn btn-primary pull-right">Check</a>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="basicInfoList.length==0" style="color: #ccc;">
+        <h1 class="mx-1"><i class="fa fa-info-circle" aria-hidden="true"></i>No Basic infos Added</h1>
+    </div>
+</div>
+
+
+<div class="wezenModal" *ngIf="showAddBasicInfo||showEditBasicInfo">
+    <div (click)="closeModal()"
+        style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;">
+    </div>
+    <div class="card container my-5" style="width: 500px;z-index: 10;">
+        <div class="formBody container my-3">
+            <h6 *ngIf="!showEditBasicInfo" style="color:#000">Screen</h6>
+            <select *ngIf="!showEditBasicInfo" class="form-select form-control" aria-label="Default select example"
+                [(ngModel)]="currentBody.screen">
+                <option selected>Select Screen</option>
+                <option *ngFor="let screen of screenList" [value]="screen">{{screen}}</option>
+            </select>
+            <h6 style="color:#000">Title</h6>
+            <input [(ngModel)]="currentBody.title" class="form-control" />
+            <h6 style="color:#000">Description</h6>
+            <textarea [(ngModel)]="currentBody.description" class="form-control"></textarea>
+            <!-- <input  [(ngModel)]="currentBody.screen" class="form-control" /> -->
+            <div *ngIf="currentBody.screen=='home'">
+                <h6 style="color:#000">We Inspire Text</h6>
+                <textarea [(ngModel)]="currentBody.description1" class="form-control"></textarea>
+                <h6 style="color:#000">Why Choose Us</h6>
+                <textarea [(ngModel)]="currentBody.description2" class="form-control"></textarea>
+                <h6 style="color:#000">Industries We serve</h6>
+                <textarea [(ngModel)]="currentBody.description3" class="form-control"></textarea>
+
+                <!-- <span>Select Image</span> -->
+                <!-- <label class="image-upload-container btn btn-bwm"> -->
+
+                <!-- </label> -->
+            </div>
+
+            <div *ngIf="currentBody.screen=='overview'">
+                <h6 style="color:#000">Our vision</h6>
+                <textarea [(ngModel)]="currentBody.description1" class="form-control"></textarea>
+                <h6 style="color:#000">Our Mission</h6>
+                <textarea [(ngModel)]="currentBody.description2" class="form-control"></textarea>
+                <h6 style="color:#000">Banner description</h6>
+                <textarea [(ngModel)]="currentBody.description3" class="form-control"></textarea>
+                <!-- <span>Select Image</span> -->
+                <!-- <label class="image-upload-container btn btn-bwm"> -->
+
+                <!-- </label> -->
+            </div>
+
+            <div *ngIf="currentBody.screen=='designService'">
+                <h6 style="color:#000">Design Service</h6>
+                <textarea [(ngModel)]="currentBody.description1" class="form-control"> </textarea>
+                <h6 style="color:#000">Our Features</h6>
+                <textarea [(ngModel)]="currentBody.description2" class="form-control"></textarea>
+            </div>
+
+            <div *ngIf="currentBody.screen=='developmentService'">
+                <h6 style="color:#000">Development Service</h6>
+                <textarea [(ngModel)]="currentBody.description1" class="form-control"></textarea>
+                <h6 style="color:#000">Our Features</h6>
+                <textarea [(ngModel)]="currentBody.description2" class="form-control"></textarea>
+            </div>
+            <div *ngIf="currentBody.screen=='itInfraStructureService'">
+                <h6 style="color:#000">It Infrastructure Service</h6>
+                <textarea [(ngModel)]="currentBody.description1" class="form-control"></textarea>
+                <h6 style="color:#000">Our Features</h6>
+                <textarea [(ngModel)]="currentBody.description2" class="form-control"></textarea>
+            </div>
+            <h6 style="color:#000">Image</h6>
+            <input #imageInput class="form-control" type="file" accept="image/*" (change)="processFile(imageInput)">
+            <div class="row mx-2 my-4">
+                <button (click)="addBasicInfo()" class="btn btn-primary">{{showEditBasicInfo?'Edit':'Add'}}
+                    BasicInfo</button>
+                <button (click)="closeModal()" class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wezenModal" *ngIf="showDeleteModal">
+    <div (click)="closeModal()"
+        style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;">
+    </div>
+    <div class="card container my-5" style="width: 500px;z-index: 10;">
+        <div class="container my-3">
+            <p style="color:#000">Are you sure want to delete?</p>
+            <div class="row mx-2 my-4">
+                <button (click)="deleteBasicInfo()" class="btn btn-primary">Delete</button>
+                <button (click)="closeModal()" class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

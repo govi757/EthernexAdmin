@@ -1,0 +1,95 @@
+<app-loader *ngIf="showLoader"></app-loader>
+<div class="col">
+  <div style="margin: 20px;border-bottom: 1px solid #ccc;" class="row d-flex align-items-center ">
+    <h2 ><i class="fa fa-laptop" aria-hidden="true"></i> Services</h2>
+    <button (click)="addServiceClick()" class="btn btn-primary my-2 mx-5 btn-rounded">
+      <i class="fa fa-plus" aria-hidden="true" style="color:white"></i>  
+    </button>
+</div>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item" *ngFor="let service of mainServiceTypeList" (click)="changeTab(service)" >
+      <a class="nav-link active" [ngClass]="{'active': currentMainService === service}" data-toggle="tab">{{service}}</a>
+    </li>
+  </ul>
+    <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
+        <div class="card" style="width: 18rem;margin: 10px;" *ngFor="let service of serviceList"  >
+            <div class="card-body">
+                <img [src]="service.imageUrl" width="100%" height="150"/>
+              <h5 class="card-title">{{service.title}}</h5>
+              <p class="card-text">Type: {{service.subType}}</p>
+              <a (click)="editClicked(service)" class="card-link">Edit</a>
+              <a (click)="deleteClicked(service)" class="card-link">Delete</a>
+            </div>
+          </div>
+    </div>
+    <div *ngIf="serviceList.length==0" style="color: #ccc;">  
+      <h1 class="mx-1"><i class="fa fa-laptop mx-2" aria-hidden="true"></i>No Services Added</h1>
+  </div>
+</div>
+
+
+<div class="wezenModal" *ngIf="showAddService||showEditService">
+    <div (click)="closeModal()" style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;"></div>
+    <div class="card container my-5" style="width: 500px;z-index: 10;">
+        <div class="formBody container my-3" >
+          <div *ngIf="!showEditService">
+            <h6 style="color:#000">Service Type</h6>
+            <select *ngIf="currentMainService=='Basic'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.subType">
+                <option selected>Select Service</option>
+                <option *ngFor="let val of basicServiceList" [value]="val">{{val}}</option>
+              </select>
+              <select *ngIf="currentMainService=='Design'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.subType">
+                <option selected>Select Service</option>
+                <option *ngFor="let val of designServiceList" [value]="val">{{val}}</option>
+              </select>
+              <select *ngIf="currentMainService=='Development'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.subType">
+                <option selected>Select Service</option>
+                <option *ngFor="let val of developmentServiceList" [value]="val">{{val}}</option>
+              </select>
+              <select *ngIf="currentMainService=='ItInfraManagement'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.subType">
+                <option selected>Select Service</option>
+                <option *ngFor="let val of itInfraServiceList" [value]="val">{{val}}</option>
+              </select>
+              <select *ngIf="currentMainService=='DigitalMarketing'" class="form-select form-control" aria-label="Default select example" [(ngModel)]="currentBody.subType">
+                <option selected>Select Service</option>
+                <option *ngFor="let val of digitalMarketingServices" [value]="val">{{val}}</option>
+              </select>
+            </div>
+            <h6 style="color:#000">Title</h6>
+            <input [(ngModel)]="currentBody.title" class="form-control" />
+            <h6 style="color:#000">Description</h6>
+            <textarea  [(ngModel)]="currentBody.description" class="form-control"></textarea>
+            <!-- <span>Select Image</span> -->
+            <!-- <label class="image-upload-container btn btn-bwm"> -->
+                <h6 style="color:#000">Image</h6>
+                <input #imageInput
+                class="form-control"
+                       type="file"
+                       accept="image/*"
+                       (change)="processFile(imageInput)">
+              <!-- </label> -->
+            <div class="row mx-2 my-4">
+                <button (click)="addService()"
+                class="btn btn-primary"
+                [disabled]="currentBody.description==''||currentBody.title==''||currentBody.subType==''"
+                >{{showEditService?'Edit':'Add'}} Service</button>
+                <button (click)="closeModal()"  class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wezenModal" *ngIf="showDeleteModal">
+    <div (click)="closeModal()" style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;"></div>
+    <div class="card container my-5" style="width: 500px;z-index: 10;">
+        <div class="container my-3" >
+            <p style="color:#000">Are you sure want to delete?</p>
+            <div class="row mx-2 my-4">
+                <button (click)="deleteService()" class="btn btn-primary">Delete</button>
+                <button (click)="closeModal()"  class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+

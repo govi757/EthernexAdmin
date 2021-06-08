@@ -1,0 +1,65 @@
+<div class="col">
+    <div style="margin: 20px;border-bottom: 1px solid #ccc;" class="row d-flex align-items-center ">
+    <h2 ><i class="fa fa-users" aria-hidden="true"></i> Our Team</h2>
+    <button (click)="addTeamMemberClick()" class="btn btn-primary mx-5 my-2 btn-rounded">
+        <i class="fa fa-plus" aria-hidden="true" style="color:white"></i>  
+    </button>
+</div>
+    <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
+        <div class="card" style="width: 18rem;margin: 10px;" *ngFor="let teamMember of teamMemberList"  >
+            <div class="card-body">
+                <img [src]="teamMember.imageUrl" width="100%" height="150"/>
+              <h5 class="card-title">{{teamMember.name}}</h5>
+              <a (click)="editClicked(teamMember)" class="card-link">Edit</a>
+              <a (click)="deleteClicked(teamMember)" class="card-link">Delete</a>
+            </div>
+          </div>
+    </div>
+    <div *ngIf="teamMemberList.length==0" style="color: #ccc;">  
+        <h1 class="mx-1"><i class="fa fa-users mx-2" aria-hidden="true"></i>No Team Members Added</h1>
+    </div>
+</div>
+
+
+<div class="wezenModal" *ngIf="showAddTeamMember||showEditTeamMember">
+    <div (click)="closeModal()" style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;"></div>
+    <div class="card container my-5" style="width: 500px;z-index: 10;">
+        <div class="formBody container my-3" >
+            <h6 style="color:#000">Name</h6>
+            <input [(ngModel)]="currentBody.name" class="form-control" />
+            <h6 style="color:#000">Email</h6>
+            <input [(ngModel)]="currentBody.email" class="form-control" />
+            <h6 style="color:#000">Phone Number</h6>
+            <input [(ngModel)]="currentBody.phoneNumber" class="form-control" />
+            <h6 style="color:#000">Role</h6>
+            <input  [(ngModel)]="currentBody.role" class="form-control" />
+            <!-- <span>Select Image</span> -->
+            <!-- <label class="image-upload-container btn btn-bwm"> -->
+                <h6 style="color:#000">Image</h6>
+                <input #imageInput
+                class="form-control"
+                       type="file"
+                       accept="image/*"
+                       (change)="processFile(imageInput)">
+              <!-- </label> -->
+            <div class="row mx-2 my-4">
+                <button (click)="addTeamMember()" class="btn btn-primary">{{showEditTeamMember?'Edit':'Add'}} TeamMember</button>
+                <button (click)="closeModal()"  class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wezenModal" *ngIf="showDeleteModal">
+    <div (click)="closeModal()" style="position: fixed;width: 100%;height: 100vh;background-color: #000;top:0;left:0;z-index: 9;opacity: 0.3;"></div>
+    <div class="card container my-5" style="width: 500px;z-index: 10;">
+        <div class="container my-3" >
+            <p style="color:#000">Are you sure want to delete?</p>
+            <div class="row mx-2 my-4">
+                <button (click)="deleteTeamMember()" class="btn btn-primary">Delete</button>
+                <button (click)="closeModal()"  class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+

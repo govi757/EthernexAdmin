@@ -1,0 +1,22 @@
+a{
+    cursor: pointer !important;
+}
+
+.wezenModal {
+    position: fixed;width: 100%;height: 100vh;top:0;left:0;z-index: 9;
+    animation: pulse 0.6s normal;
+}
+
+@keyframes pulse {
+    0% {
+      opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+  }
+
+  .formBody h6 {
+      margin-top: 10px;
+  }
+  

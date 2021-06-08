@@ -1,0 +1,23 @@
+<div class="container d-flex align-items-center justify-content-center">
+    <div class="col-sm-6" style="padding:100px;background-color: #212529!important; /* Black */;margin-top: 100px;">
+        <img src="../../../assets/images/logo.png" style="width:80%;margin-bottom: 20px;"/>
+        <div *ngIf="showLogin">
+            <input placeholder="Email" type="text" [(ngModel)]="loginBody.email" class="form-control my-3" />
+            <input placeholder="Password" type="password" class="form-control my-3" [(ngModel)]="loginBody.password"/>
+            <button (click)="login()" class="btn btn-primary form-control">
+                Login
+            </button>
+        </div>
+        <div *ngIf="!showLogin">
+            <input type="text" placeholder="name" [(ngModel)]="signupBody.name" class="form-control my-3" />
+            <input type="text" class="form-control my-3" [(ngModel)]="signupBody.email" placeholder="email" />
+            <input type="text" class="form-control my-3" [(ngModel)]="signupBody.phoneNumber" placeholder="Phone number" />
+            <button class="btn btn-primary form-control" (click)="signup()">
+                Signup
+            </button>
+        </div>
+        <a (click)="showLogin=!showLogin" style="cursor: pointer;color: #fff;text-align: center;width: 100%;" >Signup</a>    
+    </div>
+    
+    
+</div>

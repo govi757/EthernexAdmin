@@ -1,0 +1,39 @@
+<div class="sidenav ">
+  <img src="../../../assets/images/logo.png" style="width:50%;margin: 20px;"/>
+  
+<a (click)="sidenavPressed('basic')" class="sidenavItems" [ngClass]="{'active': activeItem === 'basic'}" >
+  <i class="fa fa-info-circle" aria-hidden="true"></i>
+  Basic Infos
+</a>
+  <a class="sidenavItems" (click)="sidenavPressed('carousel')" [ngClass]="{'active': activeItem === 'carousel'}" routerLink="dashboard/carousel">
+    <i class="fa fa-picture-o" aria-hidden="true"></i>
+    Images
+  </a>
+    <a class="sidenavItems" (click)="sidenavPressed('services')" [ngClass]="{'active': activeItem === 'services'}" >
+      <i class="fa fa-laptop" aria-hidden="true"></i>
+      Services
+    </a>
+    
+    <a (click)="sidenavPressed('team')" class="sidenavItems" [ngClass]="{'active': activeItem === 'team'}" >
+      <i class="fa fa-users" aria-hidden="true"></i>
+      Team
+    </a>
+    <a (click)="sidenavPressed('faq')" class="sidenavItems" [ngClass]="{'active': activeItem === 'faq'}" >
+      <i class="fa fa-question-circle" aria-hidden="true"></i>
+
+      FAQS
+    </a>
+    <a (click)="sidenavPressed('subscriber')" class="sidenavItems" [ngClass]="{'active': activeItem === 'subscriber'}" >
+      <i class="fa fa-bell-o" aria-hidden="true"></i>
+      Subscribers
+    </a>
+    <a (click)="sidenavPressed('meeting')" class="sidenavItems" [ngClass]="{'active': activeItem === 'meeting'}" >
+      <i class="fa fa-clock-o" aria-hidden="true"></i>
+      Meetings
+    </a>
+
+    <a (click)="logout()" class="sidenavItems" [ngClass]="{'active': activeItem === 'meeting'}" >
+      <i class="fa fa-logout" aria-hidden="true"></i>
+      Logout
+    </a>
+  </div>
